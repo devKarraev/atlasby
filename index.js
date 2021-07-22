@@ -1,9 +1,10 @@
 const fetch = require('node-fetch')
 const { Telegraf } = require('telegraf')
-const bot = new Telegraf(process.env.BOT_TOKEN);
 const Pageres = require('pageres');
 
 require('dotenv').config()
+
+const bot = new Telegraf(process.env.BOT_TOKEN);
 
 const NEEDED_TIMES = ['19', '18']
 
@@ -43,18 +44,14 @@ async function sendMail(filteredRides) {
                         }).join('')}
                     </table>`
 
-    try {
-        await new Pageres()
-            .src(`data:text/html,${table}`, ['300x300'], {filename: 'schedule'})
-            .run()
-            .then(async image => {
-                await bot.telegram.sendPhoto(140385197, {source: image[0]})
-                await bot.telegram.sendMessage(140385197,'<a href="https://atlasbus.by/%D0%9C%D0%B0%D1%80%D1%88%D1%80%D1%83%D1%82%D1%8B/%D0%9C%D0%B8%D0%BD%D1%81%D0%BA/%D0%9C%D0%BE%D0%B3%D0%B8%D0%BB%D1%91%D0%B2?date=2021-07-23&passengers=1">Ssilka</a>', {parse_mode: 'HTML'})
-            })
-            .catch(e => console.log(e))
-    } catch (e) {
-        console.log(e)
-    }
+    new Pageres()
+        .src(`data:text/html,${table}`, ['300x300'], {filename: 'schedule'})
+        .run()
+        .then(async image => {
+            await bot.telegram.sendPhoto(140385197, {source: image[0]})
+            await bot.telegram.sendMessage(140385197,'<a href="https://atlasbus.by/%D0%9C%D0%B0%D1%80%D1%88%D1%80%D1%83%D1%82%D1%8B/%D0%9C%D0%B8%D0%BD%D1%81%D0%BA/%D0%9C%D0%BE%D0%B3%D0%B8%D0%BB%D1%91%D0%B2?date=2021-07-23&passengers=1">Ssilka</a>', {parse_mode: 'HTML'})
+        })
+        .catch(e => console.log(e))
 }
 
 setInterval(fetchData, 30000)
