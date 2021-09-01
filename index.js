@@ -52,7 +52,7 @@ async function sendMessage(filteredRides) {
         .run()
         .then(async image => {
             await bot.telegram.sendPhoto(CHAT_ID, {source: image[0]})
-            await bot.telegram.sendMessage(CHAT_ID,`<a href="https://atlasbus.by/%D0%9C%D0%B0%D1%80%D1%88%D1%80%D1%83%D1%82%D1%8B/%D0%9C%D0%B8%D0%BD%D1%81%D0%BA/%D0%9C%D0%BE%D0%B3%D0%B8%D0%BB%D1%91%D0%B2?date=2021-${ATLAS_DAY}-${ATLAS_MONTH}&passengers=1">Ssilka</a>`, {parse_mode: 'HTML'})
+            await bot.telegram.sendMessage(CHAT_ID,`<a href="https://atlasbus.by/%D0%9C%D0%B0%D1%80%D1%88%D1%80%D1%83%D1%82%D1%8B/%D0%9C%D0%B8%D0%BD%D1%81%D0%BA/%D0%9C%D0%BE%D0%B3%D0%B8%D0%BB%D1%91%D0%B2?date=2021-${ATLAS_MONTH}-${ATLAS_DAY}&passengers=1">Ssilka</a>`, {parse_mode: 'HTML'})
         })
         .catch(e => console.log(e))
 }
